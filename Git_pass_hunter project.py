@@ -6,10 +6,9 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 import time
 the_key = Service(r"C:\Developer/chromedriver.exe")
 Repos = []
-last_link = [] #This list to include the main python file so that we can open it.
+Python_files = []
 scrape = input("what Github page would you like to scrape? ")
 driver = webdriver.Chrome(service=the_key, options=options)
-# driver = webdriver.Chrome(service=the_key)
 driver.get(f"{scrape}")
 time.sleep(2)
 ####################################################################################
@@ -31,8 +30,8 @@ def second_page(next_page):
     res2 = driver.find_elements(By.CLASS_NAME, "react-directory-truncate")
     for a in res2:   
         if "py" in a.text:
-            last_link.append(f"{next_page}/blob/main/{a.text}")
-            for c in last_link:
+            Python_files.append(f"{next_page}/blob/main/{a.text}")
+            for c in Python_files:
                 driver.get(f"{c}")
                 time.sleep(2)
             click_the_raw_button(c)
